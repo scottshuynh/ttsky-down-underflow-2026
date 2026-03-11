@@ -28,7 +28,7 @@ module tb ();
 `endif
 
   // Replace tt_um_example with your module name:
-  tt_um_bouncing_stripes i_bouncing_stripes (
+  tt_um_scottshuynh_ad_astra i_ad_astra (
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST

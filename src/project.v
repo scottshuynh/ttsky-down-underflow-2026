@@ -1,11 +1,13 @@
-/*
- * Copyright (c) 2024 Uri Shaked
- * SPDX-License-Identifier: Apache-2.0
- */
+// Original work:
+// Copyright (c) 2024 Uri Shaked
+// SPDX-License-Identifier: Apache-2.0
+// 
+// Modified work (C)2026 Scott Huynh
+// Wrapping Project F - Ad Astra for TTSKY26a tapeout
 
 `default_nettype none
 
-module tt_um_bouncing_stripes(
+module tt_um_scottshuynh_ad_astra(
   input  wire [7:0] ui_in,    // Dedicated inputs
   output wire [7:0] uo_out,   // Dedicated outputs
   input  wire [7:0] uio_in,   // IOs: Input path
@@ -19,9 +21,9 @@ module tt_um_bouncing_stripes(
   // VGA signals
   wire hsync;
   wire vsync;
-  wire [1:0] R;
-  wire [1:0] G;
-  wire [1:0] B;
+  wire [3:0] R;
+  wire [3:0] G;
+  wire [3:0] B;
   wire video_active;
   wire [9:0] pix_x;
   wire [9:0] pix_y;
@@ -36,46 +38,14 @@ module tt_um_bouncing_stripes(
   // Suppress unused signals warning
   wire _unused_ok = &{ena, ui_in, uio_in};
 
-  reg [9:0] counter;
-  reg is_increment;
-
-  hvsync_generator hvsync_gen(
-    .clk(clk),
-    .reset(~rst_n),
-    .hsync(hsync),
-    .vsync(vsync),
-    .display_on(video_active),
-    .hpos(pix_x),
-    .vpos(pix_y)
+  top_greet  top_greet_inst (
+    .clk_25m(clk),
+    .rst_n(rst_n),
+    .vga_hsync(hsync),
+    .vga_vsync(vsync),
+    .vga_r(R),
+    .vga_g(G),
+    .vga_b(B)
   );
   
-  wire [9:0] moving_x = pix_x * counter;
-
-  assign R = video_active ? {moving_x[5], pix_y[2]} : 2'b00;
-  assign G = video_active ? {moving_x[6], pix_y[3]} : 2'b00;
-  assign B = video_active ? {moving_x[7], pix_y[4]} : 2'b00;
-  
-  always @(posedge vsync, negedge rst_n) begin
-    if (~rst_n) begin
-      counter <= 0;
-      is_increment <= 1;
-    end else begin
-      if (is_increment) begin
-        counter <= counter + 1;
-      end else if (~is_increment) begin
-        counter <= counter - 1;
-      end
-
-      if (counter == 2**4 - 1) begin
-        is_increment <= 0;
-      end else if (counter == 1) begin
-        is_increment <= 1;
-      end
-    end
-
-  end
-
-  // Suppress unused signals warning
-  wire _unused_ok_ = &{moving_x, pix_y};
-
 endmodule
