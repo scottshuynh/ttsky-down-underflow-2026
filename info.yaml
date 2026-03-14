@@ -1,7 +1,7 @@
 
 # Tiny Tapeout project information
 project:
-  title:        "bouncing_stripes"      # Project title
+  title:        "Bouncing Stripes" # Project title
   author:       "Scott Huynh"      # Your name
   discord:      "scottshuynh"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "From TT Workshop at FOSSi Down Underflow 2026"      # One line description of what your project does
@@ -12,7 +12,7 @@ project:
   tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_scottshuynh_bouncing_stripes"
+  top_module:  "tt_um_bouncing_stripes"
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:
