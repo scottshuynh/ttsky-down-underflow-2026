@@ -43,20 +43,20 @@ module top_greet (
     localparam GREET_LENGTH = 16;    // each containing 16 code points
     localparam G_ROM_WIDTH  = $clog2('h5F);  // highest code point is U+005F
     localparam G_ROM_DEPTH  = GREET_MSGS * GREET_LENGTH;
-    localparam GREET_FILE   = "greet.mem";
 
     logic [$clog2(G_ROM_DEPTH)-1:0] greet_rom_addr;
     logic [G_ROM_WIDTH-1:0] greet_rom_data;  // code point
+    logic [$clog2('hFF)-1:0] greet_rom_byte_data;
 
-    rom_sync #(
-        .WIDTH(G_ROM_WIDTH),
-        .DEPTH(G_ROM_DEPTH),
-        .INIT_F(GREET_FILE)
-    ) greet_rom (
+    greet_rom i_greet_rom (
         .clk(clk_25m),
         .addr(greet_rom_addr),
-        .data(greet_rom_data)
+        .data(greet_rom_byte_data)
     );
+
+    always_comb begin
+        greet_rom_data = greet_rom_byte_data[G_ROM_WIDTH-1:0];
+    end
 
     // greeting selector
     localparam MSG_CHG = 80;  // change message every N frames
@@ -78,16 +78,11 @@ module top_greet (
     localparam FONT_GLYPHS = 64;  // number of glyphs (0x00 - 0x3F)
     localparam F_ROM_DEPTH = FONT_GLYPHS * FONT_HEIGHT;
     localparam CP_START    = 'h20;  // first code point (0x5F - 0x20 = 0x3F)
-    localparam FONT_FILE   = "font_unscii_8x8_latin_uc.mem";
 
     logic [$clog2(F_ROM_DEPTH)-1:0] font_rom_addr;
     logic [FONT_WIDTH-1:0] font_rom_data;  // line of glyph pixels
 
-    rom_sync #(
-        .WIDTH(FONT_WIDTH),
-        .DEPTH(F_ROM_DEPTH),
-        .INIT_F(FONT_FILE)
-    ) font_rom (
+    font_unscii_8x8_latin_uc_rom font_rom (
         .clk(clk_25m),
         .addr(font_rom_addr),
         .data(font_rom_data)
