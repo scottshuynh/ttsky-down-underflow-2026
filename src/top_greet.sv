@@ -39,7 +39,7 @@ module top_greet (
     );
 
     // greeting message ROM
-    localparam GREET_MSGS   = 16;    // 16 messages
+    localparam GREET_MSGS   = 8;    // 8 messages
     localparam GREET_LENGTH = 16;    // each containing 16 code points
     localparam G_ROM_WIDTH  = $clog2('h5F);  // highest code point is U+005F
     localparam G_ROM_DEPTH  = GREET_MSGS * GREET_LENGTH;
