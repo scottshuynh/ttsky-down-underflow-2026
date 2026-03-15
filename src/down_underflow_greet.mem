@@ -1,0 +1,55 @@
+// Original work:
+// Project F: Ad Astra - Unscii 8x8 Font Glyphs (UC Latin 64 chars)
+// Learn more at https://projectf.io/posts/fpga-ad-astra/
+
+// Modified work (C)2026 Scott Huynh
+// (C)2026 Scott Huynh, open source hardware released under the MIT License
+// Reduced set. No longer unicode. It's all arbitrary now as per font_unscii_8x8_latin_reduced.mem
+
+// 0: 0x000
+//
+//
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+
+// 1: 0x010
+//   ASIC
+// AD ASTRA
+00 00 06 18 0E 08 00 00
+06 09 00 06 18 19 17 06
+
+// 2: 0x000
+//  DOWN
+//   UNDER
+00 09 14 1C 13 00 00 00
+00 00 1A 13 09 0A 17 00
+
+// 3: 0x030
+//  FLOW
+//   2026
+00 0B 11 14 1C 00 00 00
+00 00 03 02 03 04 00 00
+
+// 4: 0x040
+//  FOSSI
+//    FDN.
+00 0B 14 18 18 0E 00 00
+00 00 00 0B 09 13 01 00
+
+// 5: 0x015
+//  MORSE
+//   MICRO
+00 12 14 17 18 0A 00 00
+00 00 12 0E 08 17 14 00
+
+// 6: 0x060
+//  IQONIC
+//   WORKS
+00 0E 16 14 13 0E 08 00
+00 00 1C 14 17 10 18 00
+
+// 7: 0x070
+//  TINY
+//  TAPEOUT
+00 19 0E 13 1E 00 00 00
+00 19 06 15 0A 14 1A 19

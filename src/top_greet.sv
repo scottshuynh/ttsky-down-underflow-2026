@@ -39,7 +39,7 @@ module top_greet (
     );
 
     // greeting message ROM
-    localparam GREET_MSGS   = 32;    // 32 messages
+    localparam GREET_MSGS   = 8;    // 8 messages
     localparam GREET_LENGTH = 16;    // each containing 16 code points
     localparam G_ROM_WIDTH  = $clog2('h5F);  // highest code point is U+005F
     localparam G_ROM_DEPTH  = GREET_MSGS * GREET_LENGTH;
@@ -48,7 +48,7 @@ module top_greet (
     logic [G_ROM_WIDTH-1:0] greet_rom_data;  // code point
     logic [$clog2('hFF)-1:0] greet_rom_byte_data;
 
-    greet_rom i_greet_rom (
+    down_underflow_greet_rom greet_rom (
         .clk(clk_25m),
         .addr(greet_rom_addr),
         .data(greet_rom_byte_data)
@@ -75,14 +75,13 @@ module top_greet (
     // font glyph ROM
     localparam FONT_WIDTH  = 8;   // width in pixels (also ROM width)
     localparam FONT_HEIGHT = 8;   // height in pixels
-    localparam FONT_GLYPHS = 64;  // number of glyphs (0x00 - 0x3F)
+    localparam FONT_GLYPHS = 32;  // number of glyphs (0x00 - 0x1F)
     localparam F_ROM_DEPTH = FONT_GLYPHS * FONT_HEIGHT;
-    localparam CP_START    = 'h20;  // first code point (0x5F - 0x20 = 0x3F)
 
     logic [$clog2(F_ROM_DEPTH)-1:0] font_rom_addr;
     logic [FONT_WIDTH-1:0] font_rom_data;  // line of glyph pixels
 
-    font_unscii_8x8_latin_uc_rom font_rom (
+    font_unscii_8x8_latin_reduced_rom font_rom (
         .clk(clk_25m),
         .addr(font_rom_addr),
         .data(font_rom_data)
@@ -153,7 +152,7 @@ module top_greet (
         for (int i = 0; i < SPR_CNT; i = i + 1) begin
             /* verilator lint_off WIDTH */
             spr_fdma[i] = (sx == SPR_DMA+i + 2);  // wait 2
-            spr_glyph_addr[i] = (spr_cp[i] - CP_START) * FONT_HEIGHT;
+            spr_glyph_addr[i] = (spr_cp[i]) * FONT_HEIGHT;
             if (spr_fdma[i])
                 font_rom_addr = spr_glyph_addr[i] + spr_glyph_line[i];
             /* verilator lint_on WIDTH */
@@ -196,23 +195,30 @@ module top_greet (
     logic [7:0] sf1_star, sf2_star, sf3_star;
     /* verilator lint_on UNUSED */
 
-    starfield #(.INC(-1), .SEED(21'h9A9A9)) sf1 (
-        .clk(clk_25m),
-        .en(1'b1),
-        .rst(rst),
-        .sf_on(sf1_on),
-        .sf_star(sf1_star)
-    );
+    // starfield #(.H(640), .V(480), .INC(-1), .SEED(21'h9A9A9)) sf1 (
+    //     .clk(clk_25m),
+    //     .en(1'b1),
+    //     .rst(rst),
+    //     .sf_on(sf1_on),
+    //     .sf_star(sf1_star)
+    // );
 
-    starfield #(.INC(-2), .SEED(21'hA9A9A)) sf2 (
-        .clk(clk_25m),
-        .en(1'b1),
-        .rst(rst),
-        .sf_on(sf2_on),
-        .sf_star(sf2_star)
-    );
+    // starfield #(.INC(-2), .SEED(21'hA9A9A)) sf2 (
+        // .clk(clk_25m),
+        // .en(1'b1),
+        // .rst(rst),
+        // .sf_on(sf2_on),
+        // .sf_star(sf2_star)
+    // );
 
-    starfield #(.INC(-4), .MASK(21'h7FF)) sf3 (
+    always_comb begin
+        sf1_on <= 0;
+        sf2_on <= 0;
+        sf1_star <= 8'h00;
+        sf2_star <= 8'h00;
+    end
+
+    starfield #(.H(640), .V(480), .INC(-4), .MASK(21'h7FF)) sf3 (
         .clk(clk_25m),
         .en(1'b1),
         .rst(rst),

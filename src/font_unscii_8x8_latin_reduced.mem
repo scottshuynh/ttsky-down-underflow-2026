@@ -1,0 +1,47 @@
+// Original work:
+// Project F: Ad Astra - Unscii 8x8 Font Glyphs (UC Latin 64 chars)
+// Learn more at https://projectf.io/posts/fpga-ad-astra/
+
+// Unscii was created by Viznut. These glyphs are in the Public Domain.
+// For more information visit http://viznut.fi/unscii/
+
+// Covers a subset of Basic Latin: U+0020 - U+005F (64 code points)
+// Requires 32 x 8 x 8 = 2,048 bits (512 bytes)
+// Add 0x20 to addresses to use with Unicode
+// Left-most pixel on each line is MSB
+
+// Modified work (C)2026 Scott Huynh
+// Reduced set. No longer unicode. It's all arbitrary now.
+
+00 00 00 00 00 00 00 00     // 0x00 (space)
+00 00 00 00 00 18 18 00     // 0x01 (.)
+3C 66 6E 76 66 66 3C 00     // 0x02 (0)
+3C 66 0C 18 30 60 7E 00     // 0x03 (2)
+1C 30 60 7C 66 66 3C 00     // 0x04 (6)
+00 18 18 00 00 18 18 00     // 0x05 (:)
+18 3C 66 66 7E 66 66 00     // 0x06 (A)
+7C 66 66 7C 66 66 7C 00     // 0x07 (B)
+3C 66 60 60 60 66 3C 00     // 0x08 (C)
+78 6C 66 66 66 6C 78 00     // 0x09 (D)
+7E 60 60 7C 60 60 7E 00     // 0x0A (E)
+7E 60 60 7C 60 60 60 00     // 0x0B (F)
+3C 66 60 6E 66 66 3E 00     // 0x0C (G)
+66 66 66 7E 66 66 66 00     // 0x0D (H)
+7E 18 18 18 18 18 7E 00     // 0x0E (I)
+06 06 06 06 06 66 3C 00     // 0x0F (J)
+C6 CC D8 F0 D8 CC C6 00     // 0x10 (K)
+60 60 60 60 60 60 7E 00     // 0x11 (L)
+C6 EE FE D6 C6 C6 C6 00     // 0x12 (M)
+C6 E6 F6 DE CE C6 C6 00     // 0x13 (N)
+3C 66 66 66 66 66 3C 00     // 0x14 (O)
+7C 66 66 7C 60 60 60 00     // 0x15 (P)
+3C 66 66 66 66 6C 36 00     // 0x16 (Q)
+7C 66 66 7C 6C 66 66 00     // 0x17 (R)
+3C 66 60 3C 06 66 3C 00     // 0x18 (S)
+7E 18 18 18 18 18 18 00     // 0x19 (T)
+66 66 66 66 66 66 3C 00     // 0x1A (U)
+66 66 66 66 66 3C 18 00     // 0x1B (V)
+C6 C6 C6 D6 FE EE C6 00     // 0x1C (W)
+C3 66 3C 18 3C 66 C3 00     // 0x1D (X)
+C3 66 3C 18 18 18 18 00     // 0x1E (Y)
+7E 06 0C 18 30 60 7E 00     // 0x1F (Z)

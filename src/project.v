@@ -29,7 +29,7 @@ module tt_um_scottshuynh_ad_astra(
   wire [9:0] pix_y;
 
   // TinyVGA PMOD
-  assign uo_out = {hsync, B[0], G[0], R[0], vsync, B[1], G[1], R[1]};
+  assign uo_out = {hsync, B[1], G[2], R[2], vsync, B[2], G[3], R[3]};
 
   // Unused outputs assigned to 0.
   assign uio_out = 0;
