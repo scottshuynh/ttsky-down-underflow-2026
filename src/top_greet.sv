@@ -218,7 +218,7 @@ module top_greet (
         sf2_star <= 8'h00;
     end
 
-    starfield #(.H(640), .V(480), .INC(-4), .MASK(21'h7FF)) sf3 (
+    starfield #(.INC(-4), .MASK(21'h7FF)) sf3 (
         .clk(clk_25m),
         .en(1'b1),
         .rst(rst),
