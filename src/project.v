@@ -2,7 +2,7 @@
 // Copyright (c) 2024 Uri Shaked
 // SPDX-License-Identifier: Apache-2.0
 // 
-// Modified work (C)2026 Scott Huynh
+// Modified work (C) 2026 Scott Huynh
 // Wrapping Project F - Ad Astra for TTSKY26a tapeout
 
 `default_nettype none
@@ -24,9 +24,6 @@ module tt_um_scottshuynh_ad_astra(
   wire [3:0] R;
   wire [3:0] G;
   wire [3:0] B;
-  wire video_active;
-  wire [9:0] pix_x;
-  wire [9:0] pix_y;
 
   // TinyVGA PMOD
   assign uo_out = {hsync, B[1], G[2], R[2], vsync, B[2], G[3], R[3]};

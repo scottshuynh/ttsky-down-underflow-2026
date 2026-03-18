@@ -1,7 +1,7 @@
 
 # Tiny Tapeout project information
 project:
-  title:        "Bouncing Stripes" # Project title
+  title:        "ASIC Ad Astra" # Project title
   author:       "Scott Huynh"      # Your name
   discord:      "scottshuynh"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "From TT Workshop at FOSSi Down Underflow 2026"      # One line description of what your project does

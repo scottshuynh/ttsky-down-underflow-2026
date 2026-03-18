@@ -195,7 +195,9 @@ module top_greet (
     logic [7:0] sf1_star, sf2_star, sf3_star;
     /* verilator lint_on UNUSED */
 
-    // starfield #(.H(640), .V(480), .INC(-1), .SEED(21'h9A9A9)) sf1 (
+    // TODO: Sad times. Two starfields down.
+    //       Add them back if you can.
+    // starfield #(.INC(-1), .SEED(21'h9A9A9)) sf1 (
     //     .clk(clk_25m),
     //     .en(1'b1),
     //     .rst(rst),
